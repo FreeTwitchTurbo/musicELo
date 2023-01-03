@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(musicELo main.cpp
         song.cpp song.h
-        vectorStringFunctions.cpp vectorStringFunctions.h songElo.cpp songElo.h inputValidation.cpp inputValidation.h)
+        vectorStringFunctions.cpp vectorStringFunctions.h songElo.cpp songElo.h inputValidation.cpp inputValidation.h test.cpp)

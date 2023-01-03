@@ -14,7 +14,8 @@ namespace elo{
     };
     public:
         bool operator==(const elo::song& rhs) const;
-        bool operator!=(const elo::song& rhs) const;;
+        bool operator!=(const elo::song& rhs) const;
+        bool operator<(const elo::song& rhs) const;
         song(const std::string &name, const std::string &artist, int elo);
 //        void compare;
     private:

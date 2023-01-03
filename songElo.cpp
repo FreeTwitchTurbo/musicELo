@@ -86,8 +86,8 @@ elo::song elo::songElo::getSongAt(int i) {
 void elo::songElo::compare() {
     std::cout << "How many times would you like to do battle?: ";
     int degree = get_valid_int();
-    auto newSongs = getTwoRandomSongs();
-    newSongs.first.setElo(2);
+    auto newSongs = getTwoRandomSongsThatHaveNotBeenUsed();
+//    newSongs.first.setElo(2);
     compare(newSongs.first, newSongs.second, degree);
 }
 
@@ -120,24 +120,17 @@ void elo::songElo::setNewElo(song &winner, song &loser) {
 }
 
 void elo::songElo::compare(song &song1, song &song2, int i) {
-//    for(int j = 0; j < i; ++j) {
-//        compare two songs
-//        get next
-//    }
-
-        if(i < 1){
+        if(i < 1 and lastUsedSongs.size() != songs.size()){
+            lastUsedSongs.clear();
             return;
         }
-//    for(int j = 0; j < i; ++j) {
         std::cout << "Which song is the better listen?" << std::endl << song1.getName() << " by " << song1.getArtist()
                   << " (1)" << std::endl << song2.getName() << " by " << song2.getArtist()
                   << " (2)" << std::endl << "Enter (1) or (2): ";
-
         int result;
         do {
             result = get_valid_int();
         } while (!(result >= 0 and result < 3));
-
         if (result == 0) {
             setNewElo(song1, song2); //winner goes first
         } else {
@@ -146,7 +139,9 @@ void elo::songElo::compare(song &song1, song &song2, int i) {
 
         std::cout << song1 << "'s new elo is " << song1.getElo() << std::endl <<
                   song2 << "'s new elo is " << song2.getElo() << std::endl;
-        auto newSongs = getTwoRandomSongs();
+        auto newSongs = getTwoRandomSongsThatHaveNotBeenUsed();
+        lastUsedSongs.push_back(newSongs.first);
+        lastUsedSongs.push_back(newSongs.second);
     compare(newSongs.first, newSongs.second, i-1);
 }
 
@@ -168,6 +163,20 @@ std::pair<elo::song&, elo::song&> elo::songElo::getTwoRandomSongs() {
         auto index1 = getRandomIndex();
         auto index2 = getRandomIndex();
         if(index1 != index2) {
+            auto& song1 = this->songs.at(index1);
+            auto& song2 = this->songs.at(index2);
+            std::pair<elo::song&,elo::song&> returnVal {song1,song2};
+//                auto returnVal = std::make_pair(song1,song2);
+            return returnVal;
+        }
+    }
+}
+
+std::pair<elo::song&, elo::song&> elo::songElo::getTwoRandomSongsThatHaveNotBeenUsed() {
+    while(true) {
+        auto index1 = getRandomIndex();
+        auto index2 = getRandomIndex();
+        if(index1 != index2 and !is_in(songs.at(index1),lastUsedSongs) and !is_in(songs.at(index2),lastUsedSongs)) {
             auto& song1 = this->songs.at(index1);
             auto& song2 = this->songs.at(index2);
             std::pair<elo::song&,elo::song&> returnVal {song1,song2};

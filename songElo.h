@@ -55,6 +55,8 @@ namespace elo{
         song &getSongThatIsNotThisSong(song song1, song song2);
 
         song &getSongThatHasNotBeenUsed();
+
+        std::pair<song &, song &> getTwoRandomSongsThatHaveNotBeenUsed();
     };
 }
 

@@ -28,6 +28,17 @@ bool elo::song::operator!=(const elo::song &rhs) const {
     return !(rhs == *this);
 }
 
+bool elo::song::operator<(const elo::song &rhs) const {
+    if(this->elo != rhs.elo){
+        return this->elo < rhs.elo;
+    } else if (this->name != rhs.name){
+        return this->name < rhs.name;
+    }
+    else {
+        return this->artist < rhs.artist;
+    }
+}
+
 //std::ostream& elo::song::operator<<(std::ostream& out, const elo::song& song){
 //
 //}
