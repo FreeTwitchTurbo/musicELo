@@ -10,12 +10,15 @@
 
 namespace elo{
     class songElo {
+
     public:
         std::vector<elo::song> fillVector(std::ifstream& in);
         void run();
         elo::song getSongAt(int i);
 
-    private:
+        void setNewElo(song &winner, song &loser);
+
+    protected:
         std::vector<elo::song> songs;
         std::vector<elo::song> lastUsedSongs;
         std::string path;
@@ -37,8 +40,6 @@ namespace elo{
         void addSong();
 
         song & getRandomSong();
-
-        void setNewElo(song &winner, song &loser);
 
         int getRandomIndex();
 

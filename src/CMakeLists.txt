@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 add_library(musicEloSrc
         main.cpp
         song.cpp song.h
-        vectorStringFunctions.cpp vectorStringFunctions.h songElo.cpp songElo.h inputValidation.cpp inputValidation.h test.cpp)
+        vectorStringFunctions.cpp vectorStringFunctions.h songElo.cpp songElo.h inputValidation.cpp inputValidation.h test.cpp songEloTestable.cpp songEloTestable.h)
 target_compile_options(musicEloSrc PRIVATE -Wall -Werror)
 target_include_directories(musicEloSrc PUBLIC .)
 

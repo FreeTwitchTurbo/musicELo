@@ -19,15 +19,15 @@ bool compareSongOrder(elo::song song1, elo::song song2){
 
 std::vector<elo::song> elo::songElo::fillVector(std::ifstream& in){
     std::string line;
-    std::vector<elo::song>songs;
+    std::vector<elo::song>songsFromFile;
     while(std::getline(in, line)) {
         auto components = split(line);
         if(components.size() == 3) {
             elo::song song(components[1],components[0],std::stoi(components[2]));
-            songs.push_back(song);
+            songsFromFile.push_back(song);
         }
     }
-    return songs;
+    return songsFromFile;
 }
 
 void elo::songElo::printMenu(){
